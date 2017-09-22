@@ -1,4 +1,6 @@
 # GraphQL Node.js Sample
+![Heroku](http://heroku-badge.herokuapp.com/?app=graphql-sample&style=flat&svg=1)  
+
 A GraphQL backend sample app written in Node.js. 
 
 A live version can be found at https://graphql-sample.herokuapp.com/
