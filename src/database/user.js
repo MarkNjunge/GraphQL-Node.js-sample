@@ -1,7 +1,8 @@
 const Mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const lodash = require('lodash')
+
+const { getHashed, validatePassword } = require('./../utils/authenticaiton')
 
 const JWT_SECRET = process.env.JWT_SECRET
 
@@ -157,34 +158,6 @@ function checkExistence(email, shouldExist) {
 				reject('There is already a user with that email')
 			}
 			resolve(res)
-		})
-	})
-}
-
-function getHashed(password) {
-	const salt = bcrypt.genSaltSync(12)
-
-	return new Promise((resolve, reject) => {
-		bcrypt.hash(password, salt, (err, encrypted) => {
-			if (err) {
-				reject(err.message)
-			} else {
-				resolve(encrypted)
-			}
-		})
-	})
-}
-
-function validatePassword(password, user) {
-	return new Promise((resolve, reject) => {
-		bcrypt.compare(password, user.password, (err, same) => {
-			if (err) {
-				reject(err.message)
-			} else if (!same) {
-				reject('The email or password is incorrect')
-			} else {
-				resolve(user)
-			}
 		})
 	})
 }
