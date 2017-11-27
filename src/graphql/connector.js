@@ -1,17 +1,21 @@
-const Post = require('./types/post/model').Post
-const User = require('./types/user/model').User
+const Post = require('./../database/post').Post
+const User = require('./../database/user').User
 
 function getAllPostsByUser(id) {
-  return Post.findAll({
-    userId: id
-  }, 0, 1)
+	return Post.findAll(
+		{
+			userId: id
+		},
+		0,
+		1
+	)
 }
 
 function getPostAuthor(id) {
-  return User.findOne(id)
+	return User.findOne(id)
 }
 
 module.exports = {
-  getAllPostsByUser,
-  getPostAuthor
+	getAllPostsByUser,
+	getPostAuthor
 }
