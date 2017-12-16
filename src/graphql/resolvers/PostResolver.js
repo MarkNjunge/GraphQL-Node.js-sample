@@ -1,15 +1,8 @@
-const createResolver = require('apollo-resolvers').createResolver
+const { isAuthenticatedResolver } = require('./BaseResolvers')
 
 const Post = require('./../../database/post').Post
 const connector = require('./../connector')
 const CustomErrors = require('./../errors')
-
-const baseResolver = createResolver((root, args, context, error) => {
-	const user = context.user
-	if (!user) {
-		throw new CustomErrors.Unauthorized()
-	}
-})
 
 const resolvers = {
 	Query: {
@@ -27,7 +20,7 @@ const resolvers = {
 		}
 	},
 	Mutation: {
-		addPost: baseResolver.createResolver((_, args, context) => {
+		addPost: isAuthenticatedResolver.createResolver((_, args, context) => {
 			return new Promise((resolve, reject) => {
 				Post.add(args.title, args.body, context.user.id).then(post =>
 					resolve(post)
@@ -38,14 +31,14 @@ const resolvers = {
 				})
 			})
 		}),
-		deletePost: baseResolver.createResolver((_, args, context) => {
+		deletePost: isAuthenticatedResolver.createResolver((_, args, context) => {
 			return Post.delete(args.id, context.user.id).catch(reason => {
 				throw new CustomErrors.BasicError({
 					message: reason
 				})
 			})
 		}),
-		updatePost: baseResolver.createResolver((_, args, context) => {
+		updatePost: isAuthenticatedResolver.createResolver((_, args, context) => {
 			return Post.update(args.id, args.body, context.user.id).catch(reason => {
 				throw new CustomErrors.BasicError({
 					message: reason
