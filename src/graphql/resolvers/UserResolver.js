@@ -1,7 +1,7 @@
 const createResolver = require('apollo-resolvers').createResolver
 
-const User = require('./../../../database/user').User
-const CustomErrors = require('../../errors')
+const User = require('./../../database/user').User
+const CustomErrors = require('./../errors')
 
 const baseResolver = createResolver((root, args, context, error) => {
 	const user = context.user
@@ -75,6 +75,4 @@ const resolvers = {
 	}
 }
 
-module.exports = {
-	resolvers
-}
+module.exports = resolvers
