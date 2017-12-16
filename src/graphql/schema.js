@@ -1,19 +1,13 @@
 const { makeExecutableSchema } = require('graphql-tools')
-const { mergeTypes } = require('merge-graphql-schemas')
+const { mergeTypes, fileLoader } = require('merge-graphql-schemas')
+const path = require('path')
 
 const resolvers = require('./resolver').resolvers
-const UserTypeDefs = require('./schemas/UserSchema')
-const PostTypeDefs = require('./schemas/PostSchema')
 
-const baseTypeDefs = `
-schema {
-  query: Query
-  mutation: Mutation
-}
-`
+const typesArray = fileLoader(path.join(__dirname, './schemas'))
 
 const schema = makeExecutableSchema({
-	typeDefs: mergeTypes([baseTypeDefs, UserTypeDefs, PostTypeDefs]),
+	typeDefs: mergeTypes(typesArray),
 	resolvers
 })
 
