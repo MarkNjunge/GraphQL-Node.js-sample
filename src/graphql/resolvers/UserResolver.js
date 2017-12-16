@@ -1,6 +1,7 @@
 const createResolver = require('apollo-resolvers').createResolver
 
 const User = require('./../../database/user').User
+const connector = require('./../connector')
 const CustomErrors = require('./../errors')
 
 const baseResolver = createResolver((root, args, context, error) => {
@@ -72,6 +73,11 @@ const resolvers = {
 				})
 			})
 		})
+	},
+	User: {
+		posts(user) {
+			return connector.getAllPostsByUser(user.id)
+		}
 	}
 }
 
