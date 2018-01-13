@@ -10,7 +10,7 @@ require('dotenv').config()
 
 const Database = require('./lib/database')
 const JWT_SECRET = require('./lib/config').JWT_SECRET
-const Schema = require('./lib/graphql/schema').schema
+const schema = require('./lib/graphql/schema')
 
 const app = express()
 
@@ -43,7 +43,7 @@ app.use(
   bodyParser.json(),
   graphqlExpress(req => ({
     formatError,
-    schema: Schema,
+    schema,
     context: {
       user: req.user
     }
