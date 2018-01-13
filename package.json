@@ -6,9 +6,7 @@
   "scripts": {
     "start": "node src/app.js"
   },
-  "keywords": [
-    "graph-ql"
-  ],
+  "keywords": ["graph-ql"],
   "author": "Mark Njung'e",
   "license": "Unlicense",
   "dependencies": {
