@@ -20,4 +20,5 @@ Add a **.env** file in the root path. See [.env.sample](/.env.sample)
 ## Usage
 
 1. Run using `yarn start` or `yarn server` for a live server.
-2. The GraphQL endopoint will start on `localhost:3000/graphql`. In browser IDEs are available at `localhost:3000/playground` (preferred) and `localhost:3000/graphiql`.
+2. The GraphQL endopoint will start on `localhost:3000/graphql`. In browser IDEs are available at `localhost:3000/playground` (preferred) and `localhost:3000/graphiql`.  
+   Subscriptions will only work using Graphiql.
